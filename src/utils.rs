@@ -22,10 +22,10 @@ pub fn for_string(value: &Value) -> String {
             .reduce(|sum, s: String| sum + &s)
             .unwrap_or(String::new()),
         Value::Object(map) => {
-            if map.contains_key("text") && map.contains_key("type") {
-                for_string(map.get("text").unwrap())
-            } else if map.contains_key("text") && map.contains_key("link") {
+            if map.contains_key("text") && map.contains_key("link") {
                 for_string(map.get("link").unwrap())
+            } else if map.contains_key("text") && map.contains_key("type") {
+                for_string(map.get("text").unwrap())
             } else if map.contains_key("file_token") {
                 let token = for_string(map.get("file_token").unwrap());
                 let name = for_string(map.get("name").unwrap_or(&Value::Null));
